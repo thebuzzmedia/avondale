@@ -1,0 +1,30 @@
+Implementation Notes
+====================
+*	Avondale is implemented in a fashion where all classes are defined using
+	a base interface. From there each interface provides an abstract implementation
+	that provides all the boiler plate implementation details (e.g. firing
+	PropertyChangeEvents, adding/removing listeners, getters/setters, etc.). Ontop
+	of the abstract implementation is a default implementation that provides
+	implementation-specific details such as updating the ComponentPanelState
+	when a certain property changes or specific bound calculations that utilize
+	the width of the border on a component when calculating. This separation of
+	generic/specific code between the abstract and default implementations
+	specifically provide an easy means for implementors to replace the default
+	implementations with their own custom code without needing to rewrite all
+	the boilder plate code. They can simply extend the abstract class and provide
+	their custom code in their new concrete implementation class. For example,
+	if an implementor knew all his components were fixed size (say 150x150) he
+	could extend the AbstractComponent class and provide optimized versions of
+	the bounds methods to improve performance. 
+	
+	Of course this can be accomplished regardless through inheritence in Java
+	but there is also an organizational purpose behind this as well. Since
+	Avondale is organized in this manner, it is easy for developers to look
+	into the default implementations of all the classes to get a feel for the
+	custom or "magic" code that is actually doing the work like state-maintenence
+	or bounds calculation. This kind of code is typically hidden away deep in the
+	bowels of a framework and usually provides the trickiest code to understand
+	and use when learning a new codebase. Using this organizational split it
+	should make it easier for developers to pickup Avondale and run with it. 
+	
+	6/08/06

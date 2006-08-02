@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<project name="Avondale" default="release" basedir=".">
+	<property name="lib_dir" value="lib/" />
+	<property name="src_dir" value="src/" />
+	<property name="javadoc_dir" value="docs/api" />
+	<property name="bin_dir" value="bin/" />
+	<property name="dist_dir" value="dist/" />
+	<property name="version" value="1.0" />
+
+	<property name="javadoc_jar" value="avondale-docs-${version}.jar" />
+	<property name="src_jar" value="avondale-src-${version}.jar" />
+	<property name="bin_jar" value="avondale-${version}.jar" />
+
+	<path id="classpath">
+		<pathelement path="${bin_dir}" />
+		<pathelement path="${lib_dir}/kscommon-1.0.jar" />
+	</path>
+
+	<target name="javadoc"
+	        description="Generates Javadoc for Avondale and stores it in the /docs/api directory.">
+		<delete dir="${javadoc_dir}" />
+		<mkdir dir="${javadoc_dir}" />
+
+		<javadoc packagenames="com.kallasoft.avondale.*"
+		         excludepackagenames="com.kallasoft.avondale.test"
+		         header="Avondale ${version} API Documentation"
+		         link="http://java.sun.com/j2se/1.5.0/docs/api"
+		         author="true"
+		         version="true"
+		         footer="(c) 2006 kallasoft.com"
+		         source="5.0"
+		         classpathref="classpath"
+		         destdir="${javadoc_dir}"
+		         windowtitle="Avondale ${version} API Documentation"
+		         sourcepath="${src_dir}" />
+	</target>
+
+	<target name="compile"
+	        description="Compile Avondale source code into the /bin directory">
+		<delete dir="${bin_dir}" />
+		<mkdir dir="${bin_dir}" />
+
+		<javac debug="false"
+		       classpathref="classpath"
+		       srcdir="${src_dir}"
+		       destdir="${bin_dir}" />
+	</target>
+
+	<target name="release"
+	        description="Packages Avondale and creates JARs for distribution"
+	        depends="javadoc, compile">
+		<delete dir="${dist_dir}" />
+		<mkdir dir="${dist_dir}" />
+
+		<jar basedir="${src_dir}"
+		     destfile="${dist_dir}/${src_jar}"
+		     compress="true" />
+		<jar basedir="${bin_dir}"
+		     destfile="${dist_dir}/${bin_jar}"
+		     compress="false" />
+		<jar basedir="${javadoc_dir}"
+		     destfile="${dist_dir}/${javadoc_jar}"
+		     compress="true" />
+
+		<copy todir="${dist_dir}">
+			<fileset dir="${lib_dir}" />
+		</copy>
+	</target>
+</project>
