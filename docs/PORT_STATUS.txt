@@ -1,0 +1,14 @@
+avondale - Good
+avondale.component - Good, in progress
+avondale.component.border - Good
+avondale.component.connection - Good
+avondale.component.event - Good
+avondale.component.layout - Good, simple
+avondale.component.model - Good
+avondale.component.painter - Good, in progress
+avondale.component.util - Good
+avondale.event - Good
+avondale.model - INCOMPLETE
+avondale.panel - In progress, need OverviewPanel rework and figure out if ComponentPanel will use layers as defined in model package.
+avondale.panel.tool - INCOMPLETE
+avondale.tooltip - Good
