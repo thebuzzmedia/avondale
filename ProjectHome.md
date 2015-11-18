@@ -1,0 +1,1 @@
+Avondale is intended to be a Swing based version of the Eclipse GEF project. The idea of the project is very similar to Swing with an extremely clean and well defined API. However there are constructs like connections, layers, etc. that make creating graphical designers for things like database schemas, XML files, etc. very straight forward.
